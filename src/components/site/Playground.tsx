@@ -52,9 +52,7 @@ export function Playground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [phase, setPhase] = useState<Phase>("idle");
   const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(() => {
-    try { return parseInt(localStorage.getItem("void_hs") || "0", 10); } catch { return 0; }
-  });
+  const [highScore, setHighScore] = useState(0);
   const [pulseReady, setPulseReady] = useState(true);
   const [pulsePct, setPulsePct] = useState(1);
   const [level, setLevel] = useState(1);
@@ -108,6 +106,12 @@ export function Playground() {
   }, []);
 
   useEffect(() => {
+    // Load high score from localStorage (browser-only)
+    try {
+      const saved = parseInt(localStorage.getItem("void_hs") || "0", 10);
+      if (saved > 0) setHighScore(saved);
+    } catch { /* SSR / private browsing */ }
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
