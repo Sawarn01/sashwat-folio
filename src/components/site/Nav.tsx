@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Gamepad2 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const links = [
   { label: "About", href: "#about" },
@@ -45,12 +46,21 @@ export function Nav() {
             </a>
           ))}
         </nav>
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center rounded-full border border-border-strong px-4 py-2 text-xs font-mono uppercase tracking-wider hover:bg-accent hover:text-accent-foreground transition-colors"
-        >
-          Let's Connect
-        </a>
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            to="/playground"
+            className="inline-flex items-center gap-2 rounded-full border border-border-strong px-4 py-2 text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors"
+          >
+            <Gamepad2 size={13} />
+            Playground
+          </Link>
+          <a
+            href="#contact"
+            className="inline-flex items-center rounded-full border border-border-strong px-4 py-2 text-xs font-mono uppercase tracking-wider hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
+            Let's Connect
+          </a>
+        </div>
         <button
           onClick={() => setOpen((o) => !o)}
           className="md:hidden p-2 -mr-2"
@@ -78,6 +88,14 @@ export function Nav() {
                   {l.label}
                 </a>
               ))}
+              <Link
+                to="/playground"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center gap-2 justify-center rounded-full border border-border-strong px-4 py-2.5 text-xs font-mono uppercase tracking-wider text-muted-foreground"
+              >
+                <Gamepad2 size={13} />
+                Playground
+              </Link>
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
