@@ -376,10 +376,10 @@ export function Playground() {
         }
       }
 
-      g.raf = requestAnimationFrame(loop);
+      gRef.current.raf = requestAnimationFrame(loop);
     };
 
-    g.raf = requestAnimationFrame(loop);
+    gRef.current.raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(gRef.current.raf);
